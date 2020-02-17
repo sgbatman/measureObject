@@ -3,10 +3,10 @@ import imutils
 import cv2
 
 # load the image, convert it to grayscale, blur it slightly then thresh make image to black and white
-image = cv2.imread("image/shapes_and_colors.jpg")
+image = cv2.imread("image/shapes2.jpg")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(gray, (5, 5), 0)
-thresh = cv2.threshold(blur, 60, 255, cv2.THRESH_BINARY)[1]
+thresh = cv2.threshold(blur, 145, 255, cv2.THRESH_BINARY_INV)[1]
 
 # find contours in the threshold-ed image
 cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -31,5 +31,6 @@ for c in cnts:
         cv2.putText(image, "center", (cX - 20, cY - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
 # show the image
-cv2.imshow("Image", image)
+cv2.namedWindow("Images", cv2.WINDOW_NORMAL)
+cv2.imshow("Images", image)
 cv2.waitKey(0)
